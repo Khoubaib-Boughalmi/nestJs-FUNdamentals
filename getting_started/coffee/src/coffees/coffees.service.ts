@@ -1,6 +1,7 @@
 import { Get, HttpException, HttpStatus, Injectable, NotFoundException, Param } from "@nestjs/common";
 import { coffee } from "../coffees/enteties/coffee.entety";
 import { throwError } from "rxjs";
+import { CreateCoffeeDto } from "./dto/create-coffee.dto/create-coffee.dto";
 
 //any interaction with DB
 @Injectable()
@@ -21,6 +22,11 @@ export class CoffeesService {
             throw new NotFoundException("no coffee with such id")
         // throw new HttpException("no coffee with such id", HttpStatus.NOT_FOUND);
         return selectedCoffee;
+    }
+    
+    createOne (coffeeData: CreateCoffeeDto) {
+        this.coffees.push(coffeeData);
+        return coffeeData;
     }
     
 }
